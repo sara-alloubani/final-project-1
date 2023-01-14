@@ -1,0 +1,40 @@
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+/>
+<div class="main">
+
+  <div class="login-card" >
+
+<form [formGroup]="formGroup" >
+
+  <!-- <h3>Signup</h3> -->
+  <i class="fa fa-user-circle" aria-hidden="true"></i>
+
+  <mat-form-field appearance="outline" class ="field">
+    <mat-label> <mat-icon mat-list-icon style=" font-size: 15px;">person</mat-icon> Name</mat-label>
+    <input matInput formControlName="name" placeholder="Name" type="text">
+    <mat-error *ngIf="name.invalid">You must enter a value</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class ="field">
+    <mat-label> <mat-icon mat-list-icon style=" font-size: 15px;">mail</mat-icon>Email</mat-label>
+    <input matInput placeholder="Email" type="email" formControlName="email">
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline" class ="field">
+    <mat-label><mat-icon mat-list-icon style=" font-size: 15px;">password</mat-icon>Password</mat-label>
+    <input matInput placeholder="Password" type="password" formControlName="password">
+    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+
+  </mat-form-field>
+
+
+  <button mat-raised-button  (click)="onSignupClicked()">Signup</button>
+
+</form>
+
+  </div>
+</div>

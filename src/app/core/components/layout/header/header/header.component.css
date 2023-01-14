@@ -1,0 +1,53 @@
+
+.mat-toolbar
+{
+  height: 120px;
+  background:rgb(255 255 255);
+  justify-content: space-between;
+
+
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+a{
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 0 5px;
+  font-family: revert;
+}
+a:hover
+{
+  text-decoration: underline;
+  text-decoration-color:#d32b34 ;
+  font-size: 1.7rem;
+}
+
+
+@media (max-width: 1000px) {
+
+img
+{
+  max-width: 15vh;
+  max-height: 20vh;
+  margin-left: -50px;
+}
+a{
+  font-size: 1rem;
+  font-weight: 400;
+}
+.mat-toolbar
+{
+  padding:64px
+}
+
+}

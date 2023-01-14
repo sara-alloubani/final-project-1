@@ -1,0 +1,169 @@
+<!-- <div class="spinner" *ngIf="loading">
+  <mat-spinner diameter="70" color="primary"></mat-spinner>
+</div>
+<main class="main" *ngIf="!loading">
+
+  <div class="content-section">
+    <img [src]="startup.logo" alt="image not found" *ngIf="startup.logo" />
+  </div>
+
+  <section class="works-section">
+    <div class="content">
+      <div class="card" *ngIf="startup.websiteUrl">
+        <div class="icon">
+          <mat-icon mat-list-icon>link</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Visit us:</h3>
+          <a (click)="goToLink(startup.websiteUrl)">{{ startup.websiteUrl }}</a><br/>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="startup.city">
+        <div class="icon">
+          <mat-icon mat-list-icon>location_on</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Our location:</h3>
+          <p>{{ startup.city | titlecase }}</p>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="startup.numberOfEmployees">
+        <div class="icon">
+          <mat-icon mat-list-icon>groups</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Employee</h3>
+          <p>{{ startup.numberOfEmployees }}</p>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="startup.yearsOfEstablish">
+        <div class="icon">
+          <mat-icon mat-list-icon>calendar_month</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>We establisthed in:</h3>
+          <p>{{ startup.yearsOfEstablish }}</p>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="startup.emailAddress">
+        <div class="icon">
+          <mat-icon mat-list-icon>mail</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Contact</h3>
+          <p>{{ startup.emailAddress }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+ key?:string;
+name?:string;
+logo?:string;
+designColor?:string;
+parentCategoryName?:string; -->
+
+<!-- key?:string;
+ name:string;
+  logo?:string;
+  city?:string;
+  sectors:Sectors[];
+  numberOfEmployees?:number|null;
+  yearsOfEstablish?:string;
+  websiteUrl:string;
+  emailAddress:string; -->
+  <div class="spinner" *ngIf="loading">
+    <mat-spinner diameter="70" color="primary"></mat-spinner>
+  </div>
+  <div *ngIf="!loading">
+
+
+<div class="hero-v1-section">
+  <div class="wrapper">
+    <div class="hero-v1">
+      <img class="hero-v1-photo"[src]="startup.logo" @enterAnimation alt="image not found" *ngIf="startup.logo" />
+
+      <div class="hero-v1-info" @enterAnimation>
+        <div class="hero-v1-text" > {{ startup.name | titlecase }}</div>
+        <a (click)="goToLink(startup.websiteUrl)">{{ startup.websiteUrl }}</a>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="hero-v1-angle"></div>
+</div>
+
+<div class="section no-padding" >
+  <div class="wrapper">
+    <div class="panel">
+      <div class="panel-services" >
+
+        <div class="panel-service" *ngIf="startup.city"> <a class="panel-contact">
+          <div class="circle-contact-info">
+            <div class="paner-text-label" @slideIn> Our location:</div>
+            <div class="panel-email" > {{ startup.city | titlecase }}</div>
+          </div>
+          <div class="circle-wrapper">
+            <div class="circle">
+              <mat-icon mat-list-icon  class="panel-contact-icon">location_on</mat-icon>
+            </div>
+            <div class="circle-wave-1"></div>
+            <div class="circle-wave-2"></div>
+          </div>
+        </a></div>
+
+        <div class="panel-service" *ngIf="startup.numberOfEmployees"> <a class="panel-contact">
+          <div class="circle-contact-info">
+            <div class="paner-text-label" @slideIn>Number of employees</div>
+            <div class="panel-email"> {{ startup.numberOfEmployees }}</div>
+          </div>
+          <div class="circle-wrapper">
+            <div class="circle">
+              <mat-icon mat-list-icon  class="panel-contact-icon">groups</mat-icon>
+            </div>
+            <div class="circle-wave-1"></div>
+            <div class="circle-wave-2"></div>
+          </div>
+        </a></div>
+
+        <div class="panel-service" *ngIf="startup.yearsOfEstablish"> <a class="panel-contact">
+          <div class="circle-contact-info">
+            <div class="paner-text-label" @slideIn> Years of establish</div>
+            <div class="panel-email"> {{ startup.yearsOfEstablish }}</div>
+          </div>
+          <div class="circle-wrapper">
+            <div class="circle">
+
+              <mat-icon mat-list-icon  class="panel-contact-icon">calendar_month</mat-icon>
+            </div>
+            <div class="circle-wave-1"></div>
+            <div class="circle-wave-2"></div>
+          </div>
+        </a></div>
+      </div>
+  <a class="panel-contact">
+    <div class="circle-contact-info">
+      <div class="paner-text-label" @slideIn> let's get in touch!</div>
+      <div class="panel-email"> {{startup.emailAddress}}</div>
+    </div>
+    <div class="circle-wrapper">
+      <div class="circle">
+        <mat-icon mat-list-icon  class="panel-contact-icon">mail</mat-icon>
+      </div>
+      <div class="circle-wave-1"></div>
+      <div class="circle-wave-2"></div>
+    </div>
+  </a>
+</div>
+  </div>
+</div>
+
+</div>
+
+

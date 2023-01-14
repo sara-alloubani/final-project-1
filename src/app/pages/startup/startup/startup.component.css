@@ -1,0 +1,55 @@
+.row
+{display: flex;}
+.col
+{
+  flex: 1;
+}
+.align-end
+{
+  text-align:end ;
+}
+.btn-action
+{
+  margin-inline-start: 10px;
+  transition: 0.75 ease;
+}
+
+
+
+.btn-action:hover {
+  transform: scale(1.1);
+}
+
+table{
+  width: 100%;
+
+}
+.hover
+{
+  cursor: pointer;
+}
+
+
+@media (max-width: 1000px) {
+  .main {
+    padding-left: 30px;
+  }
+
+  .works-section
+{
+  width: 70%;
+}
+
+.content-section
+{
+  width: 50vh;
+
+}
+
+}
+@media (max-width: 1000px) {
+  .main {
+    padding-left: 30px;
+  }
+
+}

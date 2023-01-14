@@ -1,0 +1,79 @@
+<form [formGroup]="formGroup">
+
+  <label for="file" class="logo">Logo</label>
+  <input id="file" type="file" accept="image/*" (change)="onFileInputChange($event)"/>
+
+  <img [src]="imgSrc"
+  alt="Image not found"
+  *ngIf="formGroup.controls['logo'].value">
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>badge</mat-icon>
+      Startup Name</mat-label>
+    <input matInput placeholder="Startup Name" formControlName="name">
+    <mat-error *ngIf="formGroup.get('name')?.invalid">
+      {{getErrorMessage(formGroup.get('name'))}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>location_on</mat-icon>
+      City</mat-label>
+    <input  matInput matInput placeholder="City" formControlName="city">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>domain</mat-icon>
+      Sectors</mat-label>
+    <mat-select formControlName="sectors" multiple>
+    <mat-option *ngFor="let topping of sectorsData$|async"
+    [value]="topping">{{topping.name}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formGroup.get('sectors')?.invalid">
+      {{getErrorMessage(formGroup.get('sectors'))}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>link</mat-icon>
+      Website Url</mat-label>
+    <input matInput matInput placeholder="Website Url"
+    formControlName="websiteUrl">
+    <mat-error *ngIf="formGroup.get('websiteUrl')?.invalid">
+      {{getErrorMessage(formGroup.get('websiteUrl'))}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>mail</mat-icon>
+      Email Address</mat-label>
+    <input  matInput matInput placeholder="Email Address"
+    formControlName="emailAddress">
+    <mat-error *ngIf="formGroup.get('emailAddress')?.invalid">
+      {{getErrorMessage(formGroup.get('emailAddress'))}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>groups</mat-icon>
+      Number Of Employees</mat-label>
+    <input  matInput type="number" matInput placeholder="Number Of Employees"
+    formControlName="numberOfEmployees">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>calendar_month</mat-icon>
+      Years Of Establish</mat-label>
+    <input matInput matInput   placeholder="Years Of Establish"
+     formControlName="yearsOfEstablish">
+  </mat-form-field>
+</form>
+
+ <div class="action-section">
+  <button mat-raised-button color="primary"  (click)="onAddclicked()">
+    <mat-icon >add</mat-icon> Add Startup
+  </button>
+</div>

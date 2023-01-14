@@ -1,0 +1,55 @@
+
+
+
+mat-sidenav
+{
+  width: 200px;
+  background-color: #fff;
+  padding: 1rem;
+  color: #000;
+
+}
+
+
+.spinner{
+  display: flex;
+  justify-content: center;
+}
+mat-sidenav-container{
+  height: 100vh;
+}
+main{
+  padding: 1rem;
+  background-color:#fff;
+}
+
+
+.child-items
+{
+  padding-inline-start: 24px !important ;
+}
+
+a{
+  text-decoration: none;
+}
+
+mat-icon
+{
+  color: rgb(156 23 30);
+  margin-inline-end: 10px;
+}
+div.mat-line.item-text
+{
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+}
+.content{
+  padding: 0.8rem;
+}
+.mat-button
+{
+  font-size: 15px;
+  font-weight: 600;
+}
+

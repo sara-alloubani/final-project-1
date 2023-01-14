@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.action-section
+{
+  text-align: end;
+  margin-inline-start: 10px;
+}
+
+
+
+.mat-drawer-inner-container {
+
+  overflow-x: hidden !important;
+
+}
+

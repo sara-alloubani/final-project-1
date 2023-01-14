@@ -1,0 +1,10 @@
+<div *ngIf="isLoggedIn$ |async;else notAuth ">
+  <!-- <router-outlet></router-outlet> -->
+  <app-side-nav></app-side-nav>
+  <!-- <ng-confirm></ng-confirm> -->
+</div>
+<ng-template #notAuth>
+  <router-outlet></router-outlet>
+
+</ng-template>
+

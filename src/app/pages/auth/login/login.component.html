@@ -1,0 +1,33 @@
+<mat-toolbar class="mat-elevation-z8 ">
+  <div>
+    <img src="https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fmodde-englishlogo-0.png?alt=media&token=0cabd3d0-05ba-45f2-91f9-9539d4bc23ff" alt="page ">
+  </div>
+</mat-toolbar>
+
+<div class="main">
+
+  <div class="login-card">
+    <form [formGroup]="formGroup">
+    <h3>Login</h3>
+
+    <mat-form-field appearance="outline" class ="field-width">
+      <mat-label> <mat-icon mat-list-icon style=" font-size: 15px;">mail</mat-icon>Email</mat-label>
+      <input matInput placeholder="Email" type="email" formControlName="email">
+      <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class ="field-width">
+      <mat-label> <mat-icon mat-list-icon style=" font-size: 15px;">password</mat-icon>Password</mat-label>
+      <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+
+    </mat-form-field>
+
+    <button mat-raised-button (click)="onloginClicked()">Login</button>
+
+    <a [routerLink]="['/auth/signup']" > Create account</a>
+    </form>
+  </div>
+</div>

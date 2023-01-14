@@ -1,0 +1,41 @@
+<form [formGroup]="formGroup">
+  <label for="file" class="logo">Logo</label>
+  <input id="file" type="file" accept="image/*"
+  (change)="onFileInputChange($event)"/>
+
+  <img [src]="imgSrc"
+  alt="Image not found"
+  *ngIf="formGroup.controls['logo'].value">
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>badge</mat-icon>
+      Sector Name</mat-label>
+    <input matInput placeholder="Sector Name" formControlName="name">
+    <mat-error *ngIf="formGroup.get('name')?.invalid">
+      {{getErrorMessage(formGroup.get('name'))}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>palette</mat-icon>
+      Design Color</mat-label>
+    <input  matInput matInput placeholder="Design Color"
+    formControlName="designColor">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon mat-list-icon>category</mat-icon>
+      Parent Category Name</mat-label>
+    <input  matInput  matInput placeholder="Parent Category Name"
+    formControlName="parentCategoryName">
+  </mat-form-field>
+
+</form>
+
+<div class="action-section">
+  <button mat-raised-button class="btn-action" color="primary"  (click)="onUpdateclicked()">
+    <mat-icon >update</mat-icon> Update Startup
+  </button>
+</div>

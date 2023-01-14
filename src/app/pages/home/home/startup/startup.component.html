@@ -1,0 +1,24 @@
+<main id="main">
+  <section id="home" class="home-section">
+    <mat-chip-list aria-label="Fish selection">
+
+      <mat-chip
+      (click)="onAllChipsClicked()">All</mat-chip>
+
+      <mat-chip *ngFor="let sector of sectorsList$|async"
+      (click)="onChipsClicked(sector)" [style.backgroundColor]="sector.designColor">
+      {{sector.name | uppercase}}
+      </mat-chip>
+    </mat-chip-list>
+
+<div class="content">
+  <div *ngFor="let startup of filteredData" class="home-card" @enterAnimation>
+    <mat-card  >
+      <img mat-card-image [src]="startup.logo" [alt]="startup.name"
+      class="home-card-img" (click)="onStartupClicked(startup)">
+    </mat-card>
+  </div>
+</div>
+
+  </section>
+</main>
