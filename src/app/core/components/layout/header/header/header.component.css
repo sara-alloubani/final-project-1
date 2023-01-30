@@ -37,17 +37,22 @@ a:hover
 
 img
 {
-  max-width: 15vh;
+  max-width: 20vh;
   max-height: 20vh;
   margin-left: -50px;
 }
 a{
   font-size: 1rem;
   font-weight: 400;
+
 }
 .mat-toolbar
 {
-  padding:64px
+  padding:55px
 }
 
+nav {
+  padding:0px;
+
+}
 }

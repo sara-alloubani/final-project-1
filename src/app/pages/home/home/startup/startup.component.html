@@ -11,14 +11,16 @@
       </mat-chip>
     </mat-chip-list>
 
-<div class="content">
+<div class="content" >
   <div *ngFor="let startup of filteredData" class="home-card" @enterAnimation>
     <mat-card  >
-      <img mat-card-image [src]="startup.logo" [alt]="startup.name"
-      class="home-card-img" (click)="onStartupClicked(startup)">
+      <img mat-card-image [src]="startup.logo" [alt]="startup.name" class="image"
+      class="home-card-img" (click)="onStartupClicked(startup)" >
     </mat-card>
   </div>
 </div>
 
   </section>
 </main>
+ <!-- <button (click)="exportPDF()">Export as PDF</button> -->
+ <!-- <button (click)="download()">Download PDF</button> -->

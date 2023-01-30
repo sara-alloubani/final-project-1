@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {AngularFireDatabase,AngularFireList,} from '@angular/fire/compat/database';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +33,11 @@ export class AuthService {
         .signInWithEmailAndPassword(email, password)
         .catch((error) => {
           window.alert(error.massage);
+
           this.router.navigate(['/auth/login']);
         })
     );
+
   }
 
   authStateSubscribe() {
@@ -60,7 +63,11 @@ export class AuthService {
       this.angularFireAuth
         .createUserWithEmailAndPassword(email, password)
         .catch((error) => {
-          window.alert(error.massage);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          })
         })
     );
   }

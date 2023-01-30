@@ -1,11 +1,21 @@
 <form [formGroup]="formGroup">
-  <label for="file" class="logo">Logo</label>
+  <!-- <label for="file" class="logo">Logo</label>
   <input id="file" type="file" accept="image/*"
   (change)="onFileInputChange($event)"/>
 
   <img [src]="imgSrc"
   alt="Image not found"
-  *ngIf="formGroup.controls['logo'].value">
+  *ngIf="formGroup.controls['logo'].value"> -->
+<div class="container">
+  <img [src]="imgSrc"
+  alt="">
+  <input id="file" type="file" accept="image/*" style="display:none"
+  (change)="onFileInputChange($event)"/>
+
+  <label for="file" >upload Logo</label>
+</div>
+
+
 
   <mat-form-field appearance="outline">
     <mat-label>
@@ -28,14 +38,14 @@
     <mat-label >
       <mat-icon mat-list-icon>palette</mat-icon>
       Design Color</mat-label>
-    <input type="color" matInput matInput placeholder="Design Color"
+    <input style="cursor: pointer;" type="color" matInput matInput placeholder="Design Color"
     formControlName="designColor">
   </mat-form-field>
 
 </form>
 
  <div class="action-section">
-  <button mat-raised-button color="primary"  (click)="onAddclicked()">
+  <button mat-raised-button  class="btn-action"color="primary"  (click)="onAddclicked()">
     <mat-icon >add</mat-icon> Add Sector
   </button>
 </div>

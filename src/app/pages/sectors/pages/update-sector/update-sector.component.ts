@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SectorsService } from 'src/app/core/services/sectors.service';
 import { UploadSectorService } from 'src/app/core/services/upload-sector.service';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2'
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-update-sector',
   templateUrl: './update-sector.component.html',
   styleUrls: ['./update-sector.component.css']
 })
-export class UpdateSectorComponent implements OnInit {
+export class UpdateSectorComponent implements OnInit ,OnDestroy {
+  private closer$=new Subject<void>();
   key:string='';
   formGroup:FormGroup;
-  imgSrc:any;
+  imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
 
   constructor(private activatedRoute:ActivatedRoute,
     private _sectorsService:SectorsService,
@@ -31,10 +33,17 @@ export class UpdateSectorComponent implements OnInit {
 
 
     }
+  ngOnDestroy(): void {
+    if(this.closer$)
+    {
+      this.closer$.next();
+      this.closer$.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
 
-    this.activatedRoute.queryParams.subscribe((result)=>{
+    this.activatedRoute.queryParams.pipe(takeUntil(this.closer$)).subscribe((result)=>{
       if(result['key'])
       {
         this.key=result['key'];
@@ -45,14 +54,24 @@ export class UpdateSectorComponent implements OnInit {
   }
   getDataById()
   {
-    this._sectorsService.getById(this.key).subscribe((result:any)=>{
+    this._sectorsService.getById(this.key).pipe(takeUntil(this.closer$)).subscribe((result:any)=>{
       this.formGroup=this.formBuilder.group({
         name:[result['name'],[Validators.required]],
         logo:result['logo'],
         designColor:result['designColor'],
         parentCategoryName:result['parentCategoryName'],
       })
-      this.imgSrc=result['logo'];
+      if(result['logo'])
+      {
+        this.imgSrc=result['logo'];
+
+      }
+      else
+      {
+        this.imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
+
+      }
+
 
     });
 
@@ -110,7 +129,7 @@ export class UpdateSectorComponent implements OnInit {
   }
   getDownloadURL()
   {
-    this._uploadSectorService.getDownloadURL().subscribe((url)=>{
+    this._uploadSectorService.getDownloadURL().pipe(takeUntil(this.closer$)).subscribe((url)=>{
       this.formGroup.controls['logo'].setValue(url);
       this.updateSector();
     });
@@ -149,7 +168,7 @@ export class UpdateSectorComponent implements OnInit {
 
 //File Reader
   const reader =new FileReader();
-  reader.onload=(event)=>(this.imgSrc=reader.result);
+  reader.onload=(event)=>(this.imgSrc=reader.result as string);
   reader.readAsDataURL(this.formGroup.controls['logo'].value)
 
   }

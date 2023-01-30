@@ -9,6 +9,7 @@ import {
   animate,
   state,
 } from '@angular/animations';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-preview',
@@ -47,6 +48,7 @@ import {
   ]
 })
 export class PreviewComponent implements OnInit {
+  private closer$=new Subject
 key:string='';
 loading=true;
 startup:Startup={
@@ -74,7 +76,7 @@ startup:Startup={
 
   getDataById()
   {
-    this._startupService.getById(this.key).subscribe((result:any)=>{
+    this._startupService.getById(this.key).pipe(takeUntil(this.closer$)).subscribe((result:any)=>{
       if(result)
       {
           this.startup=result;

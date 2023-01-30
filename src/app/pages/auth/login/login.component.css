@@ -13,6 +13,7 @@
 {
   min-height: 84vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-image:url(https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fwp7453603-portfolio-wallpapers.jpg?alt=media&token=e0e4809e-08c9-42ec-a6f7-9df2d930c00c);
@@ -36,6 +37,7 @@ form{
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap:10px
@@ -82,3 +84,33 @@ button.mat-raised-button:hover
   color:#fff;
   transform: scale(1.1);
 }
+
+@media (max-width: 700px) {
+
+  .login-card
+  {
+    min-width: 100px;
+    max-width: 300px;
+    min-height: 100px;
+  }
+  .field-width{
+    width: 230px;
+  }
+  a
+  {
+    position: relative;
+    left: -88px;
+    top: 23px;
+  }
+  .mat-toolbar
+{
+  padding: .7rem 1rem;
+}
+.mat-raised-button
+
+{
+  width: 100px;
+}
+
+}
+

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sectors } from 'src/app/core/interfaces/sectors.interface';
 import { Startup } from 'src/app/core/interfaces/startups.interface';
 import { SectorsService } from 'src/app/core/services/sectors.service';
 import { StartupsService } from 'src/app/core/services/startups.service';
+//import jsPDF from 'jspdf';
+import * as html2pdf from 'html2pdf.js';
 import {
   trigger,
   transition,
@@ -11,6 +13,8 @@ import {
   animate,
   state,
 } from '@angular/animations';
+import { Subject, takeUntil } from 'rxjs';
+import { UploadService } from 'src/app/core/services/upload.service';
 
 @Component({
   selector: 'app-startup',
@@ -48,7 +52,9 @@ import {
     ])
   ]
 })
-export class StartupComponent implements OnInit {
+export class StartupComponent implements OnInit ,OnDestroy {
+  @ViewChild('main',{static:false}) el !:ElementRef
+  private closer$=new Subject<void>();
   sectorsList$: any;
   startuplist: Startup[] = [];
   filteredData: Startup[] = [];
@@ -57,15 +63,24 @@ export class StartupComponent implements OnInit {
   constructor(
     private _sectorsService: SectorsService,
     private _startupService: StartupsService,
+    private _uploadService:UploadService,
     private router: Router,
   ) {}
+  ngOnDestroy(): void {
+    if(this.closer$)
+    {
+      this.closer$.next();
+      this.closer$.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.gellAllSectors();
     this.getAllStartup();
   }
   getAllStartup() {
-    this._startupService.getAll().subscribe((result: any[]) => {
+    this._startupService.getAll().pipe(takeUntil(this.closer$))
+    .subscribe((result: any[]) => {
       if(result){
         this.startuplist = result;
         this.filter();
@@ -111,7 +126,8 @@ export class StartupComponent implements OnInit {
 
   onAllChipsClicked()
   {
-    this._startupService.getAll().subscribe((result: any[]) => {
+    this._startupService.getAll().pipe(takeUntil(this.closer$))
+    .subscribe((result: any[]) => {
       if(result){
         this.startuplist = result;
        this.filteredData=result;
@@ -122,4 +138,34 @@ export class StartupComponent implements OnInit {
     });
 
   }
+
+  // exportPDF()
+  // {
+  //   let pdf=new jsPDF();
+  //   pdf.html(this.el.nativeElement,{
+  //     callback:()=>{
+  //       //save
+  //       pdf.save("StartupsEcosystem.pdf")
+
+  //     }
+  //   })
+
+  // }
+
+//   download(){
+//     const element = document.getElementById('home')!;
+// let opt = {
+//   filename:     'StartupsEcosystem.pdf',
+//   image:        { type: 'jpg', quality: 0.98 },
+//   html2canvas:  {},
+//   jsPDF:        { orientation: 'landscape' },
+//   toDataURL:   this._uploadService.dbpath,
+// };
+
+// // New Promise-based usage:
+// html2pdf().from(element).set(opt).save();
+
+
+
+//   }
 }

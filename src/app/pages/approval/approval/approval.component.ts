@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,12 +7,14 @@ import { Startup } from 'src/app/core/interfaces/startups.interface';
 import { StartupsService } from 'src/app/core/services/startups.service';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2'
+import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-approval',
   templateUrl: './approval.component.html',
   styleUrls: ['./approval.component.css'],
 })
-export class ApprovalComponent implements OnInit {
+export class ApprovalComponent implements OnInit ,OnDestroy {
+  private closer$=new Subject<void>();
   dataSource = new MatTableDataSource<Startup>([]);
   displayedColumns = ['name', 'emailAdress', 'sectors', 'city', 'actions'];
   userData: any;
@@ -53,9 +55,17 @@ formGroup:FormGroup;
        emailAddress:[null,[Validators.email,Validators.required]],
     })
   }
+  ngOnDestroy(): void {
+    if(this.closer$)
+    {
+      this.closer$.next();
+      this.closer$.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((result)=>{
+    this.activatedRoute.queryParams.pipe(takeUntil(this.closer$))
+    .subscribe((result)=>{
       if(result['key'])
       {
         this.key=result['key'];
@@ -67,7 +77,8 @@ formGroup:FormGroup;
 
   getDataById()
   {
-    this._startupService.getByIdRequest(this.key).subscribe((result:any)=>{
+    this._startupService.getByIdRequest(this.key).pipe(takeUntil(this.closer$))
+    .subscribe((result:any)=>{
       this.formGroup=this.formBuilder.group({
         name:result['name'],
          logo:result['logo'],
@@ -84,7 +95,8 @@ formGroup:FormGroup;
   }
 
   gellAllData() {
-    this._startupService.getAllRequested().subscribe((result: any) => {
+    this._startupService.getAllRequested().pipe(takeUntil(this.closer$))
+    .subscribe((result: any) => {
       if (result) {
         this.dataSource = new MatTableDataSource(result);
         console.log(result);

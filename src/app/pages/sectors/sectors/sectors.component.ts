@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,13 +6,15 @@ import { Sectors } from 'src/app/core/interfaces/sectors.interface';
 import { SectorsService } from 'src/app/core/services/sectors.service';
 import Swal from 'sweetalert2';
 import { MatSort } from '@angular/material/sort';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sectors',
   templateUrl: './sectors.component.html',
   styleUrls: ['./sectors.component.css'],
 })
-export class SectorsComponent implements OnInit {
+export class SectorsComponent implements OnInit ,OnDestroy{
+  private closer$=new Subject<void>();
   loading = true;
   dataSource = new MatTableDataSource<Sectors>([]);
   displayedColumns = ['name', 'designColor', 'parentCategoryName', 'actions'];
@@ -24,6 +26,13 @@ export class SectorsComponent implements OnInit {
     private _sectorsService: SectorsService,
     private router: Router
   ) {}
+  ngOnDestroy(): void {
+
+if(this.closer$)
+{
+  this.closer$.next();
+  this.closer$.unsubscribe();
+}  }
 
   ngOnInit(): void {
     this.getAllData();
@@ -37,7 +46,8 @@ export class SectorsComponent implements OnInit {
     }
   }
   getAllData() {
-    this._sectorsService.getAll().subscribe((result: any) => {
+    this._sectorsService.getAll().pipe(takeUntil(this.closer$))
+    .subscribe((result: any) => {
       if (result) {
         this.dataSource = new MatTableDataSource(result);
         console.log(result);

@@ -124,6 +124,7 @@ a{
 .hero-v1 {
 
   display: flex;
+  flex-wrap: wrap;
   -ms-flex-align: stretch;
   align-items: stretch;
 }
@@ -205,6 +206,7 @@ vertical-align: middle;
 }
 .panel-contact {
   display: flex;
+  flex-wrap: wrap;
   box-align: center;
   align-items: center;
   align-items: center;
@@ -240,6 +242,7 @@ a {
 .circle-wrapper {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   width: 80px;
   height: 80px;
   padding: 10px;
@@ -252,6 +255,7 @@ a {
   position: relative;
   z-index: 3;
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -296,4 +300,5 @@ a {
 .panel-services {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }

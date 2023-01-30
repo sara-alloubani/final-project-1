@@ -15,7 +15,7 @@ import Swal from 'sweetalert2'
 export class RequestComponent implements OnInit {
 
   formGroup:FormGroup;
-  imgSrc:any;
+  imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
   sectorsData$:any;
   constructor(private formBuilder:FormBuilder,
     private _startupsService:StartupsService,
@@ -146,7 +146,7 @@ this.sectorsData$=this._sectorsService.getAll();
 
 //File Reader
   const reader =new FileReader();
-  reader.onload=(event)=>(this.imgSrc=reader.result);
+  reader.onload=(event)=>(this.imgSrc=reader.result as string);
   reader.readAsDataURL(this.formGroup.controls['logo'].value)
 
   }

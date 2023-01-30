@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
 })
 export class AddSectorComponent implements OnInit {
   formGroup:FormGroup;
-  imgSrc:any;
+  imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
   color: string = "#127bdc";
   constructor(private formBuilder:FormBuilder,
     private location:Location,
@@ -21,6 +21,7 @@ export class AddSectorComponent implements OnInit {
     private _uploadSectorService:UploadSectorService)
 
   {
+
       this.formGroup=this.formBuilder.group({
         name:[null,[Validators.required]],
          logo:null,
@@ -111,8 +112,8 @@ export class AddSectorComponent implements OnInit {
 
 //File Reader
   const reader =new FileReader();
-  reader.onload=(event)=>(this.imgSrc=reader.result);
-  reader.readAsDataURL(this.formGroup.controls['logo'].value)
+ reader.onload=(event)=>(this.imgSrc=reader.result as string);
+    reader.readAsDataURL(this.formGroup.controls['logo'].value)
 
   }
   getDownloadURL()

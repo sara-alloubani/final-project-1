@@ -26,6 +26,8 @@
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "firebase": "^9.15.0",
+    "html2pdf.js": "^0.10.1",
+    "jspdf": "^2.5.1",
     "ng-confirm-box": "^0.0.6",
     "ngx-color-picker": "^13.0.0",
     "ngx-sharebuttons": "^11.0.0",

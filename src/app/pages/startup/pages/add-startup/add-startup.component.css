@@ -35,8 +35,9 @@ font-weight: 500;
   width: 100%;
 }
 img
-{
-  width: 50%;
+{ height: 100%;
+  width: 100%;
+  object-fit: cover;
 
 }
 .btn-action
@@ -47,4 +48,36 @@ img
 
 .btn-action:hover {
   transform: scale(1.1);
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  border: dashed 4px rgb(156 23 30);
+  border-radius: 10px;
+  color: #000;
+  text-align: center;
+  width: 30%;
+  height: 76%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 10px;
+
+}
+label{
+  background-color: aliceblue;
+  border: solid 4px rgb(156 23 30);
+  border-radius: 10px;
+  color: #000;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 6px 7px;
+  cursor: pointer;
+  width: 150px;
+  height: 47px;
+  margin-top: 20px;
 }

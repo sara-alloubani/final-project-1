@@ -16,7 +16,7 @@ import Swal from 'sweetalert2'
 export class UpdateStartupComponent implements OnInit {
   key:string='';
   formGroup:FormGroup;
-  imgSrc:any;
+  imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
   sectorsData$:any;
   constructor(private activatedRoute:ActivatedRoute,
     private _startupService:StartupsService,
@@ -68,8 +68,16 @@ this.sectorsData$=this._sectorsService.getAll();
          emailAddress:[result['emailAddress'],[Validators.email,Validators.required]],
 
       })
-      this.imgSrc=result['logo'];
+      if(result['logo'])
+      {
+        this.imgSrc=result['logo'];
 
+      }
+      else
+      {
+        this.imgSrc='https://firebasestorage.googleapis.com/v0/b/jordanministryofdigitaleconomy.appspot.com/o/JMODE%2Fcloud-upload-a30f385a928e44e199a62210d578375a.webp?alt=media&token=645f3d0f-825e-4319-8f91-8464d599987d';
+
+      }
     });
 
   }
@@ -174,7 +182,7 @@ this.sectorsData$=this._sectorsService.getAll();
 
 //File Reader
   const reader =new FileReader();
-  reader.onload=(event)=>(this.imgSrc=reader.result);
+  reader.onload=(event)=>(this.imgSrc=reader.result as string);
   reader.readAsDataURL(this.formGroup.controls['logo'].value)
 
   }
